@@ -48,7 +48,7 @@ end
 function print_something(dialog, param_index)
 	-- print("Yo something was printed guys")
 	print("brazil")
-	add_transaction(dialog)
+	-- add_transaction(dialog)
 	return 1
 end
 
@@ -80,10 +80,39 @@ function update_button_state()
 	end
 end
 
+function create_new_category()
+	res, category_name, spent, target =
+		iup.GetParam("Create a new spending category", nil,
+					"Category name: %s\n"..
+					"Spent already: %i\n"..
+					"Monthly target: %r\n"
+					,"", 0.0, 0.0)
+	
+	print(res)
+	if res then
+		table.insert(categories,{name=category_name, spend=spent, target=target})
+		-- categories_grid:append(table.unpack(categories[#categories]))
+		for i = 0, 3 do
+			categories_grid:append(iup.label{title=categories[#categories][i]})
+		end
+		categories_grid:append(iup.label{title="TEST"})
+		iup.Update(categories_grid)
+		iup.Refresh(categories_grid)
+		categories_grid:map()
+		iup.Redraw(categories_grid, 1)
+	end
+	name_btn.title="Blame"
+	lbl1test = iup.label{title="TEst 1"}
+	navbar_box:append(lbl1test)
+	navbar_box:append(iup.label{title="Test 2"})
+end
+
 function populate_grid(iup_grid)
 	for k, category in pairs(categories) do
 		print(category.name)
 		iup_grid:append(iup.label{title=category.name})
+		iup_grid:append(iup.label{title=category.spent})
+		iup_grid:append(iup.label{title=category.target})
 	end
 end
 
@@ -96,29 +125,23 @@ multi_btn = iup.button{
 	title = "multiple fields"
 	,action = getparam_multiple
 }
-
 exit_btn = iup.button{
 	title = "Exit"
 	,action = exit_window
 }
 
-transaction_grid = iup.gridbox{
-	iup.label{title="Column 1"}
-	,iup.label{title="Col2 :)"}
-	,iup.label{title="Third coluumn"}
+categories_grid = iup.gridbox{
+	iup.label{title="Category name", fontstyle="BOLD"}
+	,iup.label{title="Amount spent", fontstyle="BOLD"}
+	,iup.label{title="Target", fontstyle="BOLD"}
 
-	,iup.label{title="$1,000"}
-	,iup.label{title="Yeezys"}
-	,exit_btn
-
-	-- ,populate_grid()
 	;numdiv = 3
 	,margin = "10x10"
 	,gaplin = "10"
 	,gapcol = "10"
 }
-populate_grid(transaction_grid)
-transaction_grid:append(iup.button{title="New", action=update_button_state})
+populate_grid(categories_grid)
+categories_grid:append(iup.button{title="New", action=create_new_category})
 
 navbar_box = iup.hbox{
 	name_btn
@@ -129,9 +152,9 @@ navbar_box = iup.hbox{
 }
 
 crud_box = iup.hbox{
-	transaction_grid
+	categories_grid
 	-- ,iup.vbox{
-	-- 	add_transaction_btn
+	-- 	add_categories_btn
 	-- 	,del_transaction_btn
 	-- 	;gap=8
 	-- }
