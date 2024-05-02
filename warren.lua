@@ -12,6 +12,7 @@ transactions = {{category="Transport", spent=2.95}}
 categories = {
 	{name="Groceries", spent=15.11, target=73.15}
 	,{name="Transport", spent=24.68, target=58.12}
+	,{name="Eating out", spent=12.70, target= 31.10}
 }
 
 -- function crud_read(next_index)
@@ -90,30 +91,173 @@ function create_new_category()
 	
 	print(res)
 	if res then
-		table.insert(categories,{name=category_name, spend=spent, target=target})
+		table.insert(categories,{name=category_name, spent=spent, target=target})
+		categories_grid[(#categories*4+1)].title = category_name
+		categories_grid[(#categories*4+1)+1].title = spent
+		categories_grid[(#categories*4+1)+2].title = target
 		-- categories_grid:append(table.unpack(categories[#categories]))
-		for i = 0, 3 do
-			categories_grid:append(iup.label{title=categories[#categories][i]})
-		end
-		categories_grid:append(iup.label{title="TEST"})
-		iup.Update(categories_grid)
-		iup.Refresh(categories_grid)
-		categories_grid:map()
-		iup.Redraw(categories_grid, 1)
+		-- for i = 0, 3 do
+		-- 	categories_grid:append(iup.label{title=categories[#categories][i]})
+		-- end
+		-- categories_grid:append(iup.label{title="TEST"})
+		-- iup.Update(categories_grid)
+		-- iup.Refresh(categories_grid)
+		-- categories_grid:map()
+		-- iup.Redraw(categories_grid, 1)
 	end
-	name_btn.title="Blame"
-	lbl1test = iup.label{title="TEst 1"}
-	navbar_box:append(lbl1test)
-	navbar_box:append(iup.label{title="Test 2"})
+	-- name_btn.title="Blame"
+	-- lbl1test = iup.label{title="TEst 1"}
+	-- navbar_box:append(lbl1test)
+	-- navbar_box:append(iup.label{title="Test 2"})
 end
 
-function populate_grid(iup_grid)
-	for k, category in pairs(categories) do
-		print(category.name)
-		iup_grid:append(iup.label{title=category.name})
-		iup_grid:append(iup.label{title=category.spent})
-		iup_grid:append(iup.label{title=category.target})
+function edit_category(pos)
+	res, category_name, spent, target =
+		iup.GetParam("Create a new spending category", nil,
+					"Category name: %s\n"..
+					"Spent already: %i\n"..
+					"Monthly target: %r\n"
+					,"", 0.0, 0.0)
+	
+	print(res)
+	if res then
+		table.remove(categories, pos)
+		table.insert(categories, pos, {name=category_name, spent=spent, target=target})
+		categories_grid[(pos*4+1)].title = category_name
+		categories_grid[(pos*4+1)+1].title = spent
+		categories_grid[(pos*4+1)+2].title = target
 	end
+end
+
+function initialise_grid(iup_grid)
+	for i = 1, 30 do
+		iup_grid:append(iup.label{title="."})
+	end
+end
+
+function edit_category1(self)
+	edit_category(1)
+end
+
+function delete_category1(self)
+	print(categories[1].title)
+	table.remove(categories,1)
+	populate_grid(categories_grid)
+	-- print(categories[1].title)
+end
+
+
+function delete_category2(self)
+	print(categories[2].title)
+	table.remove(categories,2)
+	populate_grid(categories_grid)
+	-- print(categories[2].title)
+end
+
+function edit_category2(self)
+	edit_category(2)
+end
+
+function delete_category3(self)
+	print(categories[3].title)
+	table.remove(categories,3)
+	populate_grid(categories_grid)
+	-- print(categories[3].title)
+end
+
+function edit_category3(self)
+	edit_category(3)
+end
+
+function delete_category4(self)
+	print(categories[4].title)
+	table.remove(categories,4)
+	populate_grid(categories_grid)
+	-- print(categories[4].title)
+end
+
+function edit_category4(self)
+	edit_category(4)
+end
+
+function delete_category5(self)
+	print(categories[5].title)
+	table.remove(categories,5)
+	populate_grid(categories_grid)
+	-- print(categories[5].title)
+end
+
+function edit_category5(self)
+	edit_category(5)
+end
+
+function delete_category6(self)
+	print(categories[6].title)
+	table.remove(categories,6)
+	populate_grid(categories_grid)
+	-- print(categories[6].title)
+end
+
+function edit_category6(self)
+	edit_category(6)
+end
+
+function delete_category7(self)
+	print(categories[7].title)
+	table.remove(categories,7)
+	populate_grid(categories_grid)
+	-- print(categories[7].title)
+end
+
+function edit_category7(self)
+	edit_category(7)
+end
+
+function delete_category8(self)
+	print(categories[8].title)
+	table.remove(categories,8)
+	populate_grid(categories_grid)
+	-- print(categories[8].title)
+end
+
+function edit_category8(self)
+	edit_category(8)
+end
+
+function delete_category9(self)
+	print(categories[9].title)
+	table.remove(categories,9)
+	populate_grid(categories_grid)
+	-- print(categories[9].title)
+end
+
+function edit_category9(self)
+	edit_category(9)
+end
+function populate_grid(iup_grid)
+	local grid_index = 1
+	for i = 1, #categories do
+		grid_index = (i * 4) + 1
+		-- print(grid_index)
+		-- print(#categories)
+		-- print(#iup_grid)
+	
+		if iup_grid[grid_index] ~= nil then
+			iup_grid[grid_index].title = categories[i].name
+			iup_grid[grid_index+1].title = categories[i].spent
+			iup_grid[grid_index+2].title = categories[i].target
+		end
+	end
+	iup_grid[grid_index+4].title=""
+	iup_grid[grid_index+5].title=""
+	iup_grid[grid_index+6].title=""
+	-- iup_grid[grid_index+5].title=""
+	-- for k, category in pairs(categories) do
+	-- 	print(category.name)
+	-- 	iup_grid:append(iup.label{title=category.name})
+	-- 	iup_grid:append(iup.label{title=category.spent})
+	-- 	iup_grid:append(iup.label{title=category.target})
+	-- end
 end
 
 name_btn = iup.button{
@@ -134,12 +278,58 @@ categories_grid = iup.gridbox{
 	iup.label{title="Category name", fontstyle="BOLD"}
 	,iup.label{title="Amount spent", fontstyle="BOLD"}
 	,iup.label{title="Target", fontstyle="BOLD"}
+	,iup.label{title="Actions                                     ", fontstyle="BOLD"}
 
-	;numdiv = 3
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category1},iup.button{title="Delete",action=delete_category1}}
+	
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category2},iup.button{title="Delete",action=delete_category2}}
+
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category3},iup.button{title="Delete",action=delete_category3}}
+
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category4},iup.button{title="Delete",action=delete_category4}}
+
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category5},iup.button{title="Delete",action=delete_category5}}
+
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category6},iup.button{title="Delete",action=delete_category6}}
+
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category7},iup.button{title="Delete",action=delete_category7}}
+
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category8},iup.button{title="Delete",action=delete_category8}}
+
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.label{title=""}
+	,iup.hbox{iup.button{title="Edit",action=edit_category9},iup.button{title="Delete",action=delete_category9}}
+	;numdiv = 4
 	,margin = "10x10"
-	,gaplin = "10"
+	,gaplin = "20"
 	,gapcol = "10"
 }
+-- initialise_grid(categories_grid)
 populate_grid(categories_grid)
 categories_grid:append(iup.button{title="New", action=create_new_category})
 
