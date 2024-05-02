@@ -1,6 +1,11 @@
 require("iuplua")
 -- require("iupluacontrols")
 
+--[[
+	I am deeply sorry for whoever might have to read this code...
+	It's a little embarrasing
+]]--
+
 
 pboolean = 1
 pinteger = 14
@@ -8,11 +13,15 @@ preal = 1.1
 pinteger2 = 73
 preal2 = 0
 pangle = 90
+spent_this_month = 0
+target_this_month = 0
 transactions = {{category="Transport", spent=2.95}}
 categories = {
 	{name="Groceries", spent=15.11, target=73.15}
 	,{name="Transport", spent=24.68, target=58.12}
 	,{name="Eating out", spent=12.70, target= 31.10}
+	,{name="Books", spent=12.99, target=25.00}
+	,{name="Kebabs", spent=185.28, target = 7.99}
 }
 
 -- function crud_read(next_index)
@@ -260,6 +269,17 @@ function populate_grid(iup_grid)
 	-- end
 end
 
+function generate_summary()
+	spent_this_month = 0
+	target_this_month = 0
+	for key, cat in pairs(categories) do
+		spent_this_month = spent_this_month + cat.spent
+		target_this_month = target_this_month + cat.target
+	end
+	spent_summary_label.title = spent_this_month
+	target_summary_label.title = target_this_month
+end
+
 name_btn = iup.button{
 	title = "Name"
 	,action = test
@@ -272,6 +292,14 @@ multi_btn = iup.button{
 exit_btn = iup.button{
 	title = "Exit"
 	,action = exit_window
+}
+
+spent_summary_label = iup.label{
+	title = "Summary not loaded"
+}
+
+target_summary_label = iup.label{
+	title = "Summary not loaded"
 }
 
 categories_grid = iup.gridbox{
@@ -337,6 +365,7 @@ navbar_box = iup.hbox{
 	name_btn
 	,multi_btn
 	,exit_btn
+	,iup.fill{}
 	;gap=4
 	,margin="5x5"
 }
@@ -351,14 +380,30 @@ crud_box = iup.hbox{
 	;gap=8
 }
 
+summary_box = iup.vbox{
+	iup.button{title="Generate summary", action=generate_summary}
+	,iup.label{title="Spent this month", fontstyle="BOLD"}
+	,spent_summary_label
+	,iup.label{title=""}
+	,iup.label{title="Target this month", fontstyle="BOLD"}
+	,target_summary_label
+	--,iup.fill{}
+}
+
 vbox = iup.vbox{
 	iup.frame{
 		navbar_box
 		;Title="Navigation"
 	}
-	,iup.frame{
-		crud_box
-		;Title="Budgeting"
+	,iup.hbox{
+		iup.frame{
+			crud_box
+			;Title="Categories"
+		}
+		,iup.frame{
+			summary_box
+			;Title="Summary"
+		}
 	}
 }
 
