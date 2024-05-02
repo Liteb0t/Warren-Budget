@@ -94,7 +94,7 @@ function create_new_category()
 	res, category_name, spent, target =
 		iup.GetParam("Create a new spending category", nil,
 					"Category name: %s\n"..
-					"Spent already: %i\n"..
+					"Spent already: %r\n"..
 					"Monthly target: %r\n"
 					,"", 0.0, 0.0)
 	
@@ -121,12 +121,13 @@ function create_new_category()
 end
 
 function edit_category(pos)
+	local temp_category = categories[pos]
 	res, category_name, spent, target =
-		iup.GetParam("Create a new spending category", nil,
+		iup.GetParam("Edit spending category", nil,
 					"Category name: %s\n"..
-					"Spent already: %i\n"..
+					"Spent already: %r\n"..
 					"Monthly target: %r\n"
-					,"", 0.0, 0.0)
+					,temp_category.name, temp_category.spent, temp_category.target)
 	
 	print(res)
 	if res then
