@@ -140,108 +140,6 @@ function delete_category(self)
 	categories_grid:populate()
 end
 
--- function add_category_to_grid(iup_grid, cat_index)
-	
-function edit_category1(self)
-	edit_category(1)
-end
-
-function delete_category1(self)
-	print(categories[1].title)
-	table.remove(categories,1)
-	populate_grid(categories_grid)
-	-- print(categories[1].title)
-end
-
-
-function delete_category2(self)
-	print(categories[2].title)
-	table.remove(categories,2)
-	populate_grid(categories_grid)
-	-- print(categories[2].title)
-end
-
-function edit_category2(self)
-	edit_category(2)
-end
-
-function delete_category3(self)
-	print(categories[3].title)
-	table.remove(categories,3)
-	populate_grid(categories_grid)
-	-- print(categories[3].title)
-end
-
-function edit_category3(self)
-	edit_category(3)
-end
-
-function delete_category4(self)
-	print(categories[4].title)
-	table.remove(categories,4)
-	populate_grid(categories_grid)
-	-- print(categories[4].title)
-end
-
-function edit_category4(self)
-	edit_category(4)
-end
-
-function delete_category5(self)
-	print(categories[5].title)
-	table.remove(categories,5)
-	populate_grid(categories_grid)
-	-- print(categories[5].title)
-end
-
-function edit_category5(self)
-	edit_category(5)
-end
-
-function delete_category6(self)
-	print(categories[6].title)
-	table.remove(categories,6)
-	populate_grid(categories_grid)
-	-- print(categories[6].title)
-end
-
-function edit_category6(self)
-	edit_category(6)
-end
-
-function delete_category7(self)
-	print(categories[7].title)
-	table.remove(categories,7)
-	populate_grid(categories_grid)
-	-- print(categories[7].title)
-end
-
-function edit_category7(self)
-	edit_category(7)
-end
-
-function delete_category8(self)
-	print(categories[8].title)
-	table.remove(categories,8)
-	populate_grid(categories_grid)
-	-- print(categories[8].title)
-end
-
-function edit_category8(self)
-	edit_category(8)
-end
-
-function delete_category9(self)
-	print(categories[9].title)
-	table.remove(categories,9)
-	populate_grid(categories_grid)
-	-- print(categories[9].title)
-end
-
-function edit_category9(self)
-	edit_category(9)
-end
-
 function generate_summary()
 	spent_this_month = 0
 	target_this_month = 0
@@ -286,50 +184,50 @@ categories_grid = iup.gridbox{
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=1, active="NO"},iup.button{title="Delete",action=delete_category, row=1, active="NO"}, alignment="ACENTER"}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=1, active="NO"},iup.button{title="Delete",action=delete_category, row=1, active="NO"}, margin="0x0"}
 	
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=2, active="NO"},iup.button{title="Delete",action=delete_category, row=2, active="NO"}}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=2, active="NO"},iup.button{title="Delete",action=delete_category, row=2, active="NO"}; margin="0x0"}
 
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=3, active="NO"},iup.button{title="Delete",action=delete_category, row=3, active="NO"}}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=3, active="NO"},iup.button{title="Delete",action=delete_category, row=3, active="NO"}; margin="0x0"}
 
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=4, active="NO"},iup.button{title="Delete",action=delete_category, row=4, active="NO"}}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=4, active="NO"},iup.button{title="Delete",action=delete_category, row=4, active="NO"}; margin="0x0"}
 
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=5, active="NO"},iup.button{title="Delete",action=delete_category, row=5, active="NO"}}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=5, active="NO"},iup.button{title="Delete",action=delete_category, row=5, active="NO"}; margin="0x0"}
 
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=6, active="NO"},iup.button{title="Delete",action=delete_category, row=6, active="NO"}}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=6, active="NO"},iup.button{title="Delete",action=delete_category, row=6, active="NO"}; margin="0x0"}
 
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=7, active="NO"},iup.button{title="Delete",action=delete_category, row=7, active="NO"}}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=7, active="NO"},iup.button{title="Delete",action=delete_category, row=7, active="NO"}; margin="0x0"}
 
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=8, active="NO"},iup.button{title="Delete",action=delete_category, row=8, active="NO"}}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=8, active="NO"},iup.button{title="Delete",action=delete_category, row=8, active="NO"}; margin="0x0"}
 
 	,iup.label{title=""}
 	,iup.label{title=""}
 	,iup.label{title=""}
-	,iup.hbox{iup.button{title="Edit",action=edit_category, row=9, active="NO"},iup.button{title="Delete",action=delete_category, row=9, active="NO"}}
+	,iup.hbox{iup.button{title="Edit",action=edit_category, row=9, active="NO"},iup.button{title="Delete",action=delete_category, row=9, active="NO"}; margin="0x0"}
 	;numdiv = 4
 	,margin = "10x10"
-	,gaplin = "15"
+	,gaplin = "20"
 	,gapcol = "10"
 	,homogenouslin = "YES"
 	,alignmentlin = "ACENTER"
@@ -385,13 +283,8 @@ navbar_box = iup.hbox{
 	,margin="5x5"
 }
 
-crud_box = iup.hbox{
+categories_box = iup.hbox{
 	categories_grid
-	-- ,iup.vbox{
-	-- 	add_categories_btn
-	-- 	,del_transaction_btn
-	-- 	;gap=8
-	-- }
 	;gap=8
 }
 
@@ -413,7 +306,7 @@ vbox = iup.vbox{
 	}
 	,iup.hbox{
 		iup.frame{
-			crud_box
+			categories_box
 			;Title="Categories"
 		}
 		,iup.frame{
